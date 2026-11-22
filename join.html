@@ -1,1 +1,37 @@
-.
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VibeStream — Совместный эфир</title>
+  <style>
+    body { margin: 0; background: #000; color: #fff; font-family: -apple-system, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; box-sizing: border-box; }
+    .card { width: 100%; max-width: 360px; background: #0e0e14; border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 28px 22px; text-align: center; }
+    .tag { font-family: monospace; font-size: 11px; color: #7c4dff; letter-spacing: 1px; margin-bottom: 10px; }
+    h1 { font-size: 22px; margin: 0 0 8px; }
+    .code { font-family: monospace; font-size: 28px; font-weight: 700; margin: 18px 0; padding: 14px; background: rgba(124,77,255,0.12); border: 1px solid rgba(124,77,255,0.4); border-radius: 14px; }
+    .btn { display: block; width: 100%; padding: 14px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 15px; box-sizing: border-box; margin-top: 10px; }
+    .primary { background: #7c4dff; color: #000; }
+    .secondary { background: #1a1a24; color: #fff; font-weight: 500; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="tag">VIBESTREAM // LISTEN TOGETHER</div>
+    <h1>Приглашение в эфир</h1>
+    <div class="code" id="roomCode">VS-0000</div>
+    <a class="btn primary" id="openApp" href="#">Открыть в VibeStream</a>
+    <a class="btn secondary" href="https://github.com/vfhnyul-max/VibeStream-Updates/releases/download/latest/VibeStream-latest.apk">Скачать приложение (APK)</a>
+  </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const room = (params.get('room') || '').toUpperCase().replace(/[^A-Z0-9-]/g, '');
+    if (room) {
+      document.getElementById('roomCode').textContent = room;
+      const deepLink = 'vibestream://room/' + room;
+      document.getElementById('openApp').href = deepLink;
+      setTimeout(() => { window.location.href = deepLink; }, 350);
+    }
+  </script>
+</body>
+</html>
